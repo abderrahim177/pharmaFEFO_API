@@ -82,18 +82,15 @@
     <!-- MAIN CONTENT -->
     <main class="flex-1 flex flex-col overflow-y-auto">
         <!-- TOPBAR -->
-        <header class="bg-white border-b border-slate-100 h-14 flex items-center justify-between px-6 shrink-0 shadow-xs">
+        <header class="bg-teal-900 border-b border-slate-100 h-14 flex items-center justify-between px-6 shrink-0 shadow-xs">
             <h1 class="text-sm font-semibold text-slate-800">Console d'Administration</h1>
-            <div class="flex items-center gap-2 text-[10px] font-medium text-slate-400 uppercase tracking-wider bg-slate-50 px-2.5 py-1 rounded-full border border-slate-100">
-                <span class="h-1.5 w-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Claude Bernard connecté
-            </div>
         </header>
 
         <!-- CONTAINER -->
         <div class="p-6 space-y-5 max-w-6xl w-full mx-auto">
 
             <!-- RAPPORT FINANCIER MENSUEL DES PERTES -->
-            <div class="bg-white bg-teal-900 p-5 rounded-xl border border-slate-100 shadow-sm">
+            <div class="bg-teal-900 p-5 rounded-xl border border-slate-100 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-50 pb-3.5 mb-4 gap-3">
                     <div>
                         <h3 class="text-xs font-semibold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider">
@@ -108,7 +105,7 @@
 
                 <!-- Cartes Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-slate-50/60 p-3.5 rounded-lg border border-slate-100/80 flex justify-between items-start">
+                    <div class="bg-white p-3.5 rounded-lg border border-slate-100/80 flex justify-between items-start">
                         <div>
                             <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Valeur Perdue</span>
                             <span class="text-lg font-bold text-rose-600 mt-0.5 block tracking-tight">
@@ -118,7 +115,7 @@
                         <span class="text-[10px] bg-rose-50 text-rose-600 font-medium px-1.5 py-0.5 rounded">Ce mois</span>
                     </div>
 
-                    <div class="bg-slate-50/60 p-3.5 rounded-lg border border-slate-100/80 flex justify-between items-start">
+                    <div class="bg-white p-3.5 rounded-lg border border-slate-100/80 flex justify-between items-start">
                         <div>
                             <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Boîtes Détruites</span>
                             <span class="text-lg font-bold text-slate-800 mt-0.5 block tracking-tight">
@@ -128,7 +125,7 @@
                         <span class="text-[10px] bg-slate-200/60 text-slate-600 font-medium px-1.5 py-0.5 rounded">Cyclamed</span>
                     </div>
 
-                    <div class="bg-slate-50/60 p-3.5 rounded-lg border border-slate-100/80 flex justify-between items-start">
+                    <div class="bg-white p-3.5 rounded-lg border border-slate-100/80 flex justify-between items-start">
                         <div>
                             <span class="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Efficacité FEFO</span>
                             <span class="text-lg font-bold text-emerald-600 mt-0.5 block tracking-tight">
