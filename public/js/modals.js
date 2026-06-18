@@ -1,6 +1,4 @@
-/**
- * 1. تصدير دالة إغلاق المودال في المستوى الخارجي للملف لكي يراها ملف dashboard.js
- */
+
 export function closeModal() {
     const modals = document.querySelectorAll('[id^="modal"]');
     modals.forEach(modal => {
@@ -14,9 +12,6 @@ export function closeModal() {
     });
 }
 
-/**
- * 2. دالة فتح المودال (داخيلية للملف)
- */
 function openModal(modal) {
     if(!modal) return;
     modal.classList.remove('hidden');
@@ -26,12 +21,9 @@ function openModal(modal) {
     }, 10);
 }
 
-/**
- * 3. ربط الأحداث بعد تحميل الـ DOM بالكامل
- */
+
 document.addEventListener("DOMContentLoaded", function() {
 
-    // لير العمل بـ الفتح لـ المودال الخاص بإضافة مستخدم
     const btnOpenAddModal = document.getElementById('btnOpenAddModal');
     if (btnOpenAddModal) {
         btnOpenAddModal.addEventListener('click', () => {
@@ -39,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // لير العمل بـ الفتح والتعبئة لـ المودال الخاص بالتعديل
     document.querySelectorAll('.btnEditUser').forEach(button => {
         button.addEventListener('click', (e) => {
             const row = e.target.closest('tr');

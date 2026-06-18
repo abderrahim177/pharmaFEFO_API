@@ -2,13 +2,10 @@ async function loadUsers() {
     const url = 'http://localhost/PHARMAFEFO_API/src/controller/web/UserController.php';
     const tableBody = document.getElementById('usersTableBody');
     if (!tableBody) return;
-    
     try {
         const response = await fetch(url);
         const res = await response.json();
-        
         if (res.status !== 'success') return;
-        
         if (res.data.length === 0) {
             tableBody.innerHTML = `
                 <tr>
@@ -66,15 +63,14 @@ async function loadUsers() {
     } catch (error) {
         console.error('Erreur lors du chargement:', error);
     }
+
 }
 
-// كود الـ Submit للفورم
 document.getElementById('formAddUser').addEventListener('submit', function(e) {
     e.preventDefault(); 
     const url = 'http://localhost/PHARMAFEFO_API/src/controller/web/UserController.php';
     const formData = new FormData(this);
     const data = Object.fromEntries(formData.entries());
-
     fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -95,12 +91,8 @@ document.getElementById('formAddUser').addEventListener('submit', function(e) {
     })
     .catch(error => console.error('Erreur:', error));
 });
-
-// تشغيل الـ Toast وجلب الداتا تلقائياً عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    
-    loadUsers(); // <--- هادي هي لي كانت ناقصاك باش تعيط للدالة ف البلاصة!
-
+document.addEventListener('DOMContentLoaded', function() {   
+    loadUsers(); 
     const successMsg = sessionStorage.getItem('flash_success');
     if (successMsg) {
         const Toast = Swal.mixin({

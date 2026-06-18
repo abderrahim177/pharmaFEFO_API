@@ -87,6 +87,5 @@ class UserController
         exit; 
     }
 }
-
 $controller = new UserController();
 $controller->handleRequest();

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -19,53 +19,54 @@
 <body class="bg-teal-600 text-slate-600 flex h-screen overflow-hidden text-[12px] antialiased">
 
     <aside class="w-60 bg-teal-900 text-emerald-300/80 flex flex-col justify-between p-3.5 hidden md:flex shrink-0 border-r border-emerald-900/50">
-    <div>
-        <div class="flex items-center gap-2.5 px-2 py-3 border-b border-emerald-900/60">
-            <i class="fa-solid fa-mortar-pestle text-emerald-400 text-base"></i>
-            <span class="text-sm font-medium tracking-wide text-emerald-50">PharmaStock</span>
+        <div>
+            <div class="flex items-center gap-2.5 px-2 py-3 border-b border-emerald-900/60">
+                <i class="fa-solid fa-mortar-pestle text-emerald-400 text-base"></i>
+                <span class="text-sm font-medium tracking-wide text-emerald-50">PharmaStock</span>
+            </div>
+
+            <nav class="mt-5 space-y-1">
+                <a href="#" class="flex items-center gap-2.5 px-3 py-2 bg-gradient-to-r from-emerald-500/15 to-emerald-500/5 border-l-2 border-emerald-400 rounded-r-md text-emerald-50 font-normal transition duration-200">
+                    <i class="fa-solid fa-boxes-stacked w-4 text-center text-emerald-400 text-[12px]"></i>
+                    <span>Gestion du Stock</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-2.5 px-3 py-2 hover:bg-emerald-900/40 hover:text-emerald-100 border-l-2 border-transparent hover:border-emerald-700/50 rounded-r-md transition duration-200 text-emerald-400/80 group font-normal">
+                    <i class="fa-solid fa-barcode w-4 text-center text-[11px] text-emerald-500 group-hover:text-emerald-400 transition"></i>
+                    <span>Scanner Entrée</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-2.5 px-3 py-2 hover:bg-emerald-900/40 hover:text-emerald-100 border-l-2 border-transparent hover:border-emerald-700/50 rounded-r-md transition duration-200 text-emerald-400/80 group font-normal">
+                    <i class="fa-solid fa-hand-holding-medical w-4 text-center text-[11px] text-emerald-500 group-hover:text-emerald-400 transition"></i>
+                    <span>Sorties / Dispensation</span>
+                </a>
+            </nav>
         </div>
 
-        <nav class="mt-5 space-y-1">
-            <a href="#" class="flex items-center gap-2.5 px-3 py-2 bg-gradient-to-r from-emerald-500/15 to-emerald-500/5 border-l-2 border-emerald-400 rounded-r-md text-emerald-50 font-normal transition duration-200">
-                <i class="fa-solid fa-boxes-stacked w-4 text-center text-emerald-400 text-[12px]"></i>
-                <span>Gestion du Stock</span>
-            </a>
-            
-            <a href="#" class="flex items-center gap-2.5 px-3 py-2 hover:bg-emerald-900/40 hover:text-emerald-100 border-l-2 border-transparent hover:border-emerald-700/50 rounded-r-md transition duration-200 text-emerald-400/80 group font-normal">
-                <i class="fa-solid fa-barcode w-4 text-center text-[11px] text-emerald-500 group-hover:text-emerald-400 transition"></i>
-                <span>Scanner Entrée</span>
-            </a>
-            
-            <a href="#" class="flex items-center gap-2.5 px-3 py-2 hover:bg-emerald-900/40 hover:text-emerald-100 border-l-2 border-transparent hover:border-emerald-700/50 rounded-r-md transition duration-200 text-emerald-400/80 group font-normal">
-                <i class="fa-solid fa-hand-holding-medical w-4 text-center text-[11px] text-emerald-500 group-hover:text-emerald-400 transition"></i>
-                <span>Sorties / Dispensation</span>
-            </a>
-        </nav>
-    </div>
+        <div class="space-y-3">
+            <div class="border-t border-emerald-900/60 pt-3 flex items-center gap-2.5 px-2">
+                <div class="w-8 h-8 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-[11px] font-medium">
+                    <i class="fa-solid fa-user text-[10px]"></i>
+                </div>
+                <div>
+                    <p id="sessionUserName" class="text-[12px] font-normal text-emerald-100 leading-tight">Préparateur</p>
+                    <p id="sessionUserRole" class="text-[10px] text-emerald-400/70 font-normal leading-none mt-0.5">Logistique</p>
+                </div>
+            </div>
 
-    <div class="space-y-3">
-        <div class="border-t border-emerald-900/60 pt-3 flex items-center gap-2.5 px-2">
-            <div class="w-8 h-8 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center text-[11px] font-medium">
-            </div>
-            <div>
-                <p class="text-[12px] font-normal text-emerald-100 leading-tight"></p>
-                <p class="text-[10px] text-emerald-400/70 font-normal leading-none mt-0.5"></p>
-            </div>
+            <a href="../logout.php" class="flex items-center justify-between px-2.5 py-1.5 text-rose-400/90 hover:text-rose-100 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/10 rounded-md transition duration-200 group font-normal text-[11px]">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-right-from-bracket w-4 text-center text-rose-400/60 group-hover:text-rose-400 transition"></i>
+                    <span class="tracking-wide">Déconnexion</span>
+                </div>
+            </a>
         </div>
-        
-        <a href="../logout.php" class="flex items-center justify-between px-2.5 py-1.5 text-rose-400/90 hover:text-rose-100 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/10 rounded-md transition duration-200 group font-normal text-[11px]">
-            <div class="flex items-center gap-2.5">
-                <i class="fa-solid fa-right-from-bracket w-4 text-center text-rose-400/60 group-hover:text-rose-400 transition"></i>
-                <span class="tracking-wide">Déconnexion</span>
-            </div>
-        </a>
-    </div>
-</aside>
+    </aside>
 
-    <main class="flex-1 flex flex-col overflow-y-auto">
+    <main class="flex-1 flex flex-col overflow-y-auto bg-slate-50">
 
         <header class="bg-white border-b border-slate-100 h-12 flex items-center justify-between px-5 shrink-0 shadow-xs">
-            <h1 class="text-[13px] font-semibold text-slate-800">Espace Préparateur & Logistique - Epic 1</h1>
+            <h1 class="text-[13px] font-semibold text-slate-800">Espace Préparateur & Logistique - Dashboard</h1>
             <div class="flex items-center gap-3">
                 <button class="relative p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-md transition">
                     <i class="fa-solid fa-bell text-xs"></i>
@@ -80,7 +81,7 @@
                 <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Entrées ce jour</p>
-                        <p class="text-base font-semibold mt-0.5 text-slate-800"> Lot(s)</p>
+                        <p id="countEntries" class="text-base font-semibold mt-0.5 text-slate-800">0 Lot(s)</p>
                     </div>
                     <div class="w-8 h-8 bg-teal-50 text-teal-600 border border-teal-100/40 rounded-md flex items-center justify-center text-xs">
                         <i class="fa-solid fa-circle-plus"></i>
@@ -90,7 +91,7 @@
                 <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Dispensations (FEFO)</p>
-                        <p class="text-base font-semibold mt-0.5 text-slate-800"> Boîte(s)</p>
+                        <p id="countDispensations" class="text-base font-semibold mt-0.5 text-slate-800">0 Boîte(s)</p>
                     </div>
                     <div class="w-8 h-8 bg-sky-50 text-sky-600 border border-sky-100/40 rounded-md flex items-center justify-center text-xs">
                         <i class="fa-solid fa-prescription-bottle-medical"></i>
@@ -100,7 +101,7 @@
                 <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Alertes à traiter</p>
-                        <p class="text-base font-semibold mt-0.5 text-rose-600">Produit(s)</p>
+                        <p id="countAlerts" class="text-base font-semibold mt-0.5 text-rose-600">0 Produit(s)</p>
                     </div>
                     <div class="w-8 h-8 bg-rose-50 text-rose-600 border border-rose-100/40 rounded-md flex items-center justify-center text-xs">
                         <i class="fa-solid fa-triangle-exclamation"></i>
@@ -114,30 +115,13 @@
                     <h3 class="text-[11px] font-bold text-slate-800 mb-3.5 uppercase tracking-wider flex items-center gap-1.5">
                         <i class="fa-solid fa-square-plus text-teal-500"></i> US 1.1 : Entrée Produit
                     </h3>
-                    
-                    <?php if (isset($_GET['error_empty']) || isset($_SESSION['error_message'])): ?>
-                        <div class="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-2.5 rounded-md mb-4 flex items-center gap-2 text-[11px] font-medium">
-                            <i class="fa-solid fa-circle-exclamation text-rose-500 text-xs"></i>
-                            <span>
-                                <?php
-                                echo $_SESSION['error_message'] ?? "All fields are required, and the quantity must be greater than zero.";
-                                unset($_SESSION['error_message']);
-                                ?>
-                            </span>
-                        </div>
-                    <?php endif; ?>
 
-                    <?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
-                        <div class="bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-2.5 rounded-md mb-4 flex items-center gap-2 text-[11px] font-medium">
-                            <i class="fa-solid fa-circle-check text-emerald-500 text-xs"></i>
-                            <span><?php echo $_SESSION['success_message'] ?? "Product successfully accepted!"; unset($_SESSION['success_message']); ?></span>
-                        </div>
-                    <?php endif; ?>
+                    <div id="formNotification" class="hidden text-[11px] font-medium px-4 py-2.5 rounded-md mb-4 flex items-center gap-2"></div>
 
-                    <form action="/Pharmafefo-/src/controller/MedicalController.php" method="POST" class="space-y-3" onsubmit="return validateFEFOForm(event)">
+                    <form id="formAddBatch" class="space-y-3">
                         <div>
                             <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Médicament</label>
-                            <input type="text" name="pruduct_name" required placeholder="Ex: Augmentin 500mg" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
+                            <input type="text" name="product_name" required placeholder="Ex: Augmentin 500mg" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
                         </div>
                         <div>
                             <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Numéro de Lot</label>
@@ -145,7 +129,7 @@
                         </div>
                         <div>
                             <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Emplacement</label>
-                            <input type="text" name="Emplacement" required placeholder="Ex: Tiroir B-12" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
+                            <input type="text" name="emplacement" required placeholder="Ex: Tiroir B-12" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
                         </div>
                         <div>
                             <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Date Limite d'Utilisation (DLU)</label>
@@ -154,14 +138,19 @@
                         </div>
                         <div>
                             <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Quantité Reçue</label>
-                            <input type="number" name="stok" required min="1" placeholder="Ex: 50" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
+                            <input type="number" name="stock" required min="1" placeholder="Ex: 50" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
                         </div>
-                        <button type="submit" name="Enregistrer" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-1.5 rounded-md transition text-[11px] cursor-pointer shadow-xs mt-1">
+                        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-1.5 rounded-md transition text-[11px] cursor-pointer shadow-xs mt-1">
                             Classer dans la file FEFO
                         </button>
                     </form>
-                </div>
 
+                    <div id="fefoAssistantResult" class="space-y-3 mt-4">
+                        <div class="bg-white text-slate-400 p-4 rounded-lg text-center text-[11px] italic">
+                            Veuillez chercher un médicament pour afficher ses lots...
+                        </div>
+                    </div>
+                </div>
                 <div class="lg:col-span-2 bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
                     <div class="w-full">
                         <div class="flex items-center justify-between mb-2">
@@ -172,7 +161,7 @@
                         </div>
                         <p class="text-[11px] text-slate-400 mb-3">Saisissez le médicament demandé pour cibler automatiquement le lot prioritaire.</p>
 
-                        <form action="/Pharmafefo-/src/controller/MedicalController.php" method="post" class="space-y-4">
+                        <form  class="space-y-4">
                             <input type="hidden" name="action" value="search_classic">
 
                             <div class="relative">
@@ -185,14 +174,9 @@
                         </form>
 
                         <div class="space-y-3 mt-4">
-                            <?php
-                            $prod = $_SESSION['fefo_results'] ?? null;
-                            $search_error = $_SESSION['fefo_search_error'] ?? null;
-                            ?>
-
-                            <?php if (!empty($prod) && is_array($prod)): ?>
-                                <form action="../../../src/controller/process_sortie.php" method="post" class="block space-y-4">
-                                    <input type="hidden" name="lot_number" value="<?php echo htmlspecialchars($prod['lot_number']); ?>">
+                           
+                                <form class="block space-y-4">
+                                    <input type="hidden" name="lot_number">
 
                                     <div class="bg-slate-950 text-slate-300 p-3.5 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-slate-900 shadow-xs">
                                         <div class="space-y-0.5">
@@ -201,149 +185,71 @@
                                             </span>
 
                                             <h4 class="text-[13px] font-semibold text-white mt-1">
-                                                <?php echo htmlspecialchars($prod['product_name']); ?>
                                             </h4>
 
                                             <div class="flex items-center gap-3 text-[11px] text-slate-400">
-                                                <span>Lot: <b class="font-medium text-slate-200"><?php echo htmlspecialchars($prod['lot_number']); ?></b></span>
-                                                <span>Expire le: <b class="font-medium text-rose-400"><?php echo date('d/m/Y', strtotime($prod['expiration_date'])); ?></b></span>
-                                                <span>Quantité: <b class="font-medium text-sky-400"><?php echo $prod['quantity']; ?> u</b></span>
+                                                <span>Lot: <b class="font-medium text-slate-200"></b></span>
+                                                <span>Expire le: <b class="font-medium text-rose-400"></b></span>
+                                                <span>Quantité: <b class="font-medium text-sky-400">u</b></span>
                                             </div>
                                         </div>
 
                                         <div class="bg-slate-900/60 p-1.5 px-3 rounded-md border border-slate-800/80 text-center min-w-24">
                                             <span class="text-[9px] text-slate-500 block uppercase font-medium tracking-wider">Emplacement</span>
                                             <span class="text-[12px] font-semibold text-teal-400">
-                                                <?php echo htmlspecialchars($prod['Emplacement'] ?? 'Non spécifié'); ?>
                                             </span>
                                         </div>
                                     </div>
 
                                     <div class="flex justify-end mt-4">
-                                        <?php if ($prod['quantity'] > 0): ?>
                                             <button type="submit" name="confirmer_sortie" class="bg-sky-600 hover:bg-sky-700 text-white font-medium py-1.5 px-3 rounded-md transition text-[11px] flex items-center gap-1.5 cursor-pointer shadow-xs">
                                                 <i class="fa-solid fa-check text-[10px]"></i> Confirmer la sortie
                                             </button>
-                                        <?php else: ?>
-                                            <button type="button" disabled class="bg-slate-800 text-slate-500 font-medium py-1.5 px-3 rounded-md text-[11px] flex items-center gap-1.5 cursor-not-allowed">
-                                                <i class="fa-solid fa-ban text-[10px]"></i> Rupture de stock
-                                            </button>
-                                        <?php endif; ?>
                                     </div>
                                 </form>
-
-                            <?php else: ?>
                                 <div class="bg-white text-slate-400 p-4 rounded-lg  text-center text-[11px] italic">
-                                    <?php echo $search_error ?? "Veuillez chercher un médicament pour afficher ses lots..."; ?>
                                 </div>
-                            <?php
-                            endif;
-
-                            unset($_SESSION['fefo_results']);
-                            unset($_SESSION['fefo_search_error']);
-                            ?>
+                            
                         </div>
                     </div>
-                </div>
-
-            </div>
-
-            <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-[11px] font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fa-solid fa-list-ol text-teal-500"></i> File d'attente globale FEFO (Lots Prioritaires en Stock)
-                    </h3>
-                    <span class="text-[10px] text-slate-400 italic">Trié automatiquement par ordre critique d'expiration</span>
-                </div>
-
-                <div class="w-full overflow-x-auto">
-                    <table class="w-full text-left border-collapse min-w-[650px]">
-                        <thead>
-                            <tr class="border-b border-slate-100 text-slate-400 text-[10px] uppercase tracking-wider bg-slate-50/50">
-                                <th class="p-2 font-semibold">Médicament</th>
-                                <th class="p-2 font-semibold">N° Lot</th>
-                                <th class="p-2 font-semibold">Emplacement</th>
-                                <th class="p-2 font-semibold">DLU (Expiration)</th>
-                                <th class="p-2 font-semibold text-right">Statut FEFO</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-50 text-[11px]">
-                            <?php if (!empty($Allusers)): ?>
-                                <?php foreach ($Allusers as $user):
-                                    $today_date = new DateTime();
-                                    $expire_date = new DateTime($user['expiration_date']);
-                                    $interval = $today_date->diff($expire_date);
-                                    $days_left = (int)$interval->format('%r%a');
-                                    
-                                    if ($days_left <= 30) {
-                                        $status_text = "Priorité 1 (Urgent)";
-                                        $badge_class = "bg-rose-50 text-rose-700 border border-rose-100";
-                                        $date_class = "text-rose-600 font-medium";
-                                    } elseif ($days_left <= 90) {
-                                        $status_text = "Priorité 2";
-                                        $badge_class = "bg-amber-50 text-amber-700 border border-amber-100";
-                                        $date_class = "text-amber-600 font-medium";
-                                    } else {
-                                        $status_text = "En Attente";
-                                        $badge_class = "bg-emerald-50 text-emerald-700 border border-emerald-100";
-                                        $date_class = "text-emerald-600 font-medium";
-                                    }
-                                ?>
-                                    <tr class="hover:bg-slate-50/80 transition">
-                                        <td class="p-2 font-medium text-slate-800"><?php echo htmlspecialchars($user['product_name']); ?></td>
-                                        <td class="p-2 text-slate-500 font-mono"><?php echo htmlspecialchars($user['lot_number']); ?></td>
-                                        <td class="p-2">
-                                            <span class="bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded-sm font-medium text-[10px]">
-                                                <?php echo htmlspecialchars($user['Emplacement'] ?? 'Non spécifié'); ?>
-                                            </span>
-                                        </td>
-                                        <td class="p-2 <?php echo $date_class; ?>">
-                                            <?php echo date('d/m/Y', strtotime($user['expiration_date'])); ?>
-                                        </td>
-                                        <td class="p-2 text-right">
-                                            <span class="<?php echo $badge_class; ?> px-2 py-0.5 rounded-sm font-medium text-[9px] uppercase tracking-wider inline-block">
-                                                <?php echo $status_text; ?>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="5" class="p-4 text-center text-slate-400 italic">
-                                        No products found in the FEFO queue.
-                                    </td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
         </div>
+
+        <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-[11px] font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-ol text-teal-500"></i> File d'attente globale FEFO (Lots Prioritaires en Stock)
+                </h3>
+                <span class="text-[10px] text-slate-400 italic">Trié automatiquement par ordre critique d'expiration</span>
+            </div>
+
+            <div class="w-full overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[650px]">
+                    <thead>
+                        <tr class="border-b border-slate-100 text-slate-400 text-[10px] uppercase tracking-wider bg-slate-50/50">
+                            <th class="p-2 font-semibold">Médicament</th>
+                            <th class="p-2 font-semibold">N° Lot</th>
+                            <th class="p-2 font-semibold">Emplacement</th>
+                            <th class="p-2 font-semibold">DLU (Expiration)</th>
+                            <th class="p-2 font-semibold text-right">Statut FEFO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fefoTableBody" class="divide-y divide-slate-50 text-[11px]">
+                        <tr>
+                            <td colspan="5" class="p-4 text-center text-slate-400 italic">
+                                Chargement de la file FEFO...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        </div>
     </main>
-
-    <script>
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('dlu_input').min = today;
-
-        function validateFEFOForm(event) {
-            const dluInput = document.getElementById('dlu_input').value;
-            const errorSpan = document.getElementById('date_error');
-
-            const selectedDate = new Date(dluInput);
-            const currentDate = new Date(today);
-
-            if (!dluInput || selectedDate < currentDate) {
-                event.preventDefault();
-                errorSpan.classList.remove('hidden');
-                return false;
-            }
-
-            errorSpan.classList.add('hidden');
-            alert('Produit validé et classé selon l\'ordre FEFO !');
-            return true;
-        }
-    </script>
+    <script type="module" src="../../public/js/Medical.js"></script>
 </body>
 
 </html>
