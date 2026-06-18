@@ -17,7 +17,7 @@
 $current_page = basename($_SERVER['SCRIPT_NAME']);
 ?>
 
-<aside class="w-60 bg-slate-900 text-slate-400 flex flex-col justify-between hidden md:flex border-r border-slate-800 shrink-0">
+<aside class="w-60 bg-black text-slate-400 flex flex-col justify-between hidden md:flex border-r border-slate-800 shrink-0">
     <div>
         <div class="flex items-center gap-2.5 px-5 py-4 border-b border-slate-800/60">
             <div class="w-7 h-7 bg-teal-500 rounded-lg flex items-center justify-center text-white shadow-sm">
@@ -113,57 +113,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
                             <th class="py-2.5 px-4 text-right w-20">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100 text-xs text-slate-600">
-                        <?php if (!empty($users)): ?>
-                            <?php foreach ($users as $user): ?>
-                                <?php
-                                $roleClasses = [
-                                    'Administrateur' => 'bg-teal-50 text-teal-700 border-teal-100/40',
-                                    'Pharmacien'     => 'bg-emerald-50 text-emerald-700 border-emerald-100/40',
-                                    'Preparateur'    => 'bg-amber-50 text-amber-700 border-amber-100/40',
-                                    'Préparateur'    => 'bg-amber-50 text-amber-700 border-amber-100/40'
-                                ];
-
-                                $currentRole = $user['role'];
-                                $badgeClass = $roleClasses[$currentRole] ?? 'bg-slate-50 text-slate-700 border-slate-100';
-                                ?>
-                                <tr class="hover:bg-slate-50/40 transition">
-                                    <td class="py-3 px-4 text-center font-mono text-[11px] text-slate-400 target-id"><?php echo htmlspecialchars($user['id']); ?></td>
-                                    <td class="py-3 px-4 font-medium text-slate-800 target-name"><?php echo htmlspecialchars($user['name']); ?></td>
-                                    <td class="py-3 px-4 text-slate-500 font-normal target-email"><?php echo htmlspecialchars($user['email']); ?></td>
-                                    <td class="py-3 px-4">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold border target-role <?= $badgeClass ?>" data-role="<?php echo htmlspecialchars($user['role']); ?>">
-                                            <?php echo htmlspecialchars($user['role']); ?>
-                                        </span>
-                                    </td>
-                                    <td class="py-3 px-4 text-slate-400 text-[11px]"><?php echo htmlspecialchars($user['created_at']); ?></td>
-                                    <td class="py-3 px-4">
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] bg-emerald-50 text-emerald-700 font-semibold border border-emerald-100/20 target-status" data-status="<?php echo htmlspecialchars($user['status']); ?>">
-                                            <span class="w-1 h-1 bg-emerald-500 rounded-full"></span> <?php echo htmlspecialchars($user['status']); ?>
-                                        </span>
-                                    </td>
-                                    <td class="py-3 px-4 text-right">
-                                        <div class="flex items-center justify-end gap-1">
-                                            <button title="Modifier" class="btnEditUser p-1 text-slate-400 hover:text-teal-600 hover:bg-slate-50 rounded transition cursor-pointer">
-                                                <i class="fa-solid fa-pen-to-square text-[11px]"></i>
-                                            </button>
-                                            <button title="Supprimer" class="btnDeleteUser p-1 text-slate-400 hover:text-rose-600 hover:bg-slate-50 rounded transition cursor-pointer" 
-                                                    data-id="<?php echo htmlspecialchars($user['id']); ?>" 
-                                                    data-name="<?php echo htmlspecialchars($user['name']); ?>">
-                                                <i class="fa-solid fa-trash-can text-[11px]"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="7" class="py-8 text-center text-slate-400 italic bg-slate-50/10">
-                                    <i class="fa-solid fa-users-slash text-slate-300 block text-lg mb-1.5"></i>
-                                    Aucun utilisateur trouvé.
-                                </td>
-                            </tr>
-                        <?php endif; ?>
+                    <tbody id="usersTableBody" class="divide-y divide-slate-100 text-xs text-slate-600">
                     </tbody>
                 </table>
             </div>

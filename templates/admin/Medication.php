@@ -21,7 +21,7 @@ $current_page = basename($_SERVER['SCRIPT_NAME']);
 ?>
 
 <!-- SIDEBAR -->
-<aside class="w-60 bg-slate-900 text-slate-400 flex flex-col justify-between hidden md:flex border-r border-slate-800 shrink-0">
+<aside class="w-60 bg-black text-slate-400 flex flex-col justify-between hidden md:flex border-r border-slate-800 shrink-0">
     <div>
         <div class="flex items-center gap-2.5 px-5 py-4 border-b border-slate-800/60">
             <div class="w-7 h-7 bg-teal-500 rounded-lg flex items-center justify-center text-white shadow-sm">

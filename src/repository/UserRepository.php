@@ -26,4 +26,16 @@ class UserRepository {
             throw $e; 
         }
     }
+    public function getAllUsers() {
+    try {
+        $query = "SELECT id, name, email, role, status, created_at FROM users ORDER BY id DESC";
+        
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        throw new Exception("Erreur query: " . $e->getMessage());
+    }
+}
 }

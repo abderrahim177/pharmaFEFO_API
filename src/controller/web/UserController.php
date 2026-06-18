@@ -16,7 +16,35 @@ class UserController
         $db = $database->getConnection();
         $this->repository = new UserRepository($db); 
     }
+    public function handleRequest() {
+        header('Content-Type: application/json');
+        $method = $_SERVER['REQUEST_METHOD'];
 
+        if ($method === 'POST') {
+            $this->store();
+        } elseif ($method === 'GET') {
+            $this->index();
+        } else {
+            $this->sendResponse('error', 'Méthode non autorisée.');
+        }
+    }
+    public function index() {
+    try {
+        $users = $this->repository->getAllUsers();
+        
+        echo json_encode([
+            'status' => 'success',
+            'data' => $users
+        ]);
+        exit;
+    } catch (Exception $e) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Erreur Database: ' . $e->getMessage()
+        ]);
+        exit;
+    }
+}
     public function store() 
     {
         header('Content-Type: application/json');
@@ -41,7 +69,6 @@ class UserController
         if (empty($name) || empty($email) || empty($password)) {
             $this->sendResponse('error', 'Tous les champs (Nom, Email, Mot de passe) sont obligatoires.');
         }
-        
         try { 
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $this->repository->Adduser($name, $email, $hashedPassword, $role, $status);
@@ -51,7 +78,6 @@ class UserController
             $this->sendResponse('error', 'Erreur lors de l\'enregistrement: ' . $e->getMessage());
         }
     }
-
     private function sendResponse($status, $message) 
     {
         echo json_encode([
@@ -63,4 +89,4 @@ class UserController
 }
 
 $controller = new UserController();
-$controller->store();
+$controller->handleRequest();
