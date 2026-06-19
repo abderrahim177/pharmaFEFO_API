@@ -240,6 +240,7 @@ $result = $repository->GeteTotaleLots();
                             <th class="p-2 font-semibold">Emplacement</th>
                             <th class="p-2 font-semibold">DLU (Expiration)</th>
                             <th class="p-2 font-semibold text-right">Statut FEFO</th>
+                            <th class="p-2 font-semibold text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="fefoTableBody" class="divide-y divide-slate-50 text-[11px]">

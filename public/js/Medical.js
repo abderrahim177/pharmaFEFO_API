@@ -2,7 +2,6 @@ async function loadFEFOQueue() {
     const url = 'http://localhost/PHARMAFEFO_API/src/controller/web/MedicalContrroller.php';
     const tableBody = document.getElementById('fefoTableBody');
     if (!tableBody) return;
-
     try {
         const response = await fetch(url);
         const res = await response.json();
@@ -55,6 +54,16 @@ async function loadFEFOQueue() {
                         <span class="${badgeClass} px-2 py-0.5 rounded-sm font-medium text-[9px] uppercase tracking-wider inline-block">
                             ${statusText}
                         </span>
+                    </td>
+                    <td class="p-2 text-right">
+                        <div class="flex items-center justify-end gap-1.5">
+                            <button onclick="editProduct(${item.id || "''"})" title="Modifier" class="w-6 h-6 rounded-md bg-teal-50 text-teal-600 hover:bg-teal-600 hover:text-white border border-teal-100/50 flex items-center justify-center transition duration-200 cursor-pointer">
+                                <i class="fa-solid fa-pen-to-square text-[10px]"></i>
+                            </button>
+                            <button onclick="deleteProduct(${item.id || "''"})" title="Supprimer" class="w-6 h-6 rounded-md bg-rose-50 text-rose-600 hover:bg-rose-600 hover:text-white border border-rose-100/50 flex items-center justify-center transition duration-200 cursor-pointer">
+                                <i class="fa-solid fa-trash text-[10px]"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
             `;
