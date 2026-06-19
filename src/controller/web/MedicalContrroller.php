@@ -19,7 +19,6 @@ class MedicaleController
     public function handleRequest() {
         header('Content-Type: application/json');
         $method = $_SERVER['REQUEST_METHOD'];
-
         if ($method === 'POST') {
             $this->store();
         } elseif ($method === 'GET') {
@@ -62,15 +61,15 @@ class MedicaleController
     $product_name    = isset($data['product_name']) ? htmlspecialchars(trim($data['product_name'])) : '';
     $product_lot     = isset($data['product_lot']) ? htmlspecialchars(trim($data['product_lot'])) : '';
     $date_expiration = $data['date_expiration'] ?? ''; 
-    $quantity        = isset($data['stock']) ? htmlspecialchars(trim($data['stock'])) : ''; // تقرأ stock
-    $Emplacement     = isset($data['emplacement']) ? htmlspecialchars(trim($data['emplacement'])) : ''; // تقرأ emplacement
-
-    if (empty($product_name) || empty($product_lot) || empty($date_expiration) || empty($quantity) || empty($Emplacement)) {
+    $quantity        = isset($data['stock']) ? htmlspecialchars(trim($data['stock'])) : ''; 
+    $Emplacement     = isset($data['emplacement']) ? htmlspecialchars(trim($data['emplacement'])) : ''; 
+    $Price        = isset($data['price']) ? htmlspecialchars(trim($data['price'])) : '';
+    if (empty($product_name) || empty($Price) || empty($product_lot) || empty($date_expiration) || empty($quantity) || empty($Emplacement)) {
         $this->sendResponse('error', 'Tous les champs (Médicament, Lot, Expiration, Quantité, Emplacement) sont obligatoires.');
     }
 
    try { 
-    $this->repository->insertProduct($product_name, $product_lot, $date_expiration, $quantity, $Emplacement);
+    $this->repository->insertProduct($product_name,$product_lot, $Price, $date_expiration, $quantity, $Emplacement);
     $this->sendResponse('success', 'Le produit ' . $product_name . ' a été classé avec succès !');
 } catch (Exception $e) {
     $this->sendResponse('error', 'Erreur lors de l\'enregistrement: ' . $e->getMessage());

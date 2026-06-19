@@ -1,6 +1,14 @@
+<?php 
+require_once __DIR__ . '/../../src/repository/MedicaleRepository.php';
+require_once __DIR__ . '/../../config/database.php';
+
+$dbInstance = new Database();
+$pdo = $dbInstance->getConnection();
+$repository = new MedicaleRepository($pdo);
+$result = $repository->GeteTotaleLots();
+?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +26,7 @@
 
 <body class="bg-teal-600 text-slate-600 flex h-screen overflow-hidden text-[12px] antialiased">
 
-    <aside class="w-60 bg-teal-900 text-emerald-300/80 flex flex-col justify-between p-3.5 hidden md:flex shrink-0 border-r border-emerald-900/50">
+    <aside class="w-60 bg-black text-emerald-300/80 flex flex-col justify-between p-3.5 hidden md:flex shrink-0 border-r border-emerald-900/50">
         <div>
             <div class="flex items-center gap-2.5 px-2 py-3 border-b border-emerald-900/60">
                 <i class="fa-solid fa-mortar-pestle text-emerald-400 text-base"></i>
@@ -81,7 +89,7 @@
                 <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex items-center justify-between">
                     <div>
                         <p class="text-[10px] text-slate-400 font-bold tracking-wider uppercase">Entrées ce jour</p>
-                        <p id="countEntries" class="text-base font-semibold mt-0.5 text-slate-800">0 Lot(s)</p>
+                        <p id="countEntries" class="text-base font-semibold mt-0.5 text-slate-800"><?= $result ?> Lot(s)</p>
                     </div>
                     <div class="w-8 h-8 bg-teal-50 text-teal-600 border border-teal-100/40 rounded-md flex items-center justify-center text-xs">
                         <i class="fa-solid fa-circle-plus"></i>
@@ -137,6 +145,10 @@
                             <span class="text-[10px] text-rose-500 mt-0.5 hidden font-medium" id="date_error">La date doit être aujourd'hui ou dans le futur.</span>
                         </div>
                         <div>
+                            <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">price</label>
+                            <input type="number" name="price" required min="1" placeholder="Ex: 10$" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
+                        </div>
+                        <div>
                             <label class="block text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-1">Quantité Reçue</label>
                             <input type="number" name="stock" required min="1" placeholder="Ex: 50" class="w-full px-2.5 py-1.5 border border-slate-200 rounded-md focus:outline-hidden focus:border-teal-500 text-[11px] bg-slate-50/40 transition">
                         </div>
@@ -144,12 +156,6 @@
                             Classer dans la file FEFO
                         </button>
                     </form>
-
-                    <div id="fefoAssistantResult" class="space-y-3 mt-4">
-                        <div class="bg-white text-slate-400 p-4 rounded-lg text-center text-[11px] italic">
-                            Veuillez chercher un médicament pour afficher ses lots...
-                        </div>
-                    </div>
                 </div>
                 <div class="lg:col-span-2 bg-white p-4 rounded-lg border border-slate-100 shadow-sm flex flex-col justify-between">
                     <div class="w-full">

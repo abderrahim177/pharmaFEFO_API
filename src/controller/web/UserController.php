@@ -6,7 +6,6 @@ require_once __DIR__ . '/../../repository/UserRepository.php';
 class UserController 
 {
     private $repository;
-    
     public function __construct()
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -19,7 +18,6 @@ class UserController
     public function handleRequest() {
         header('Content-Type: application/json');
         $method = $_SERVER['REQUEST_METHOD'];
-
         if ($method === 'POST') {
             $this->store();
         } elseif ($method === 'GET') {
@@ -31,7 +29,6 @@ class UserController
     public function index() {
     try {
         $users = $this->repository->getAllUsers();
-        
         echo json_encode([
             'status' => 'success',
             'data' => $users

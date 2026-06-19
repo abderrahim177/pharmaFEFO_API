@@ -7,7 +7,7 @@ class MedicaleRepository{
     public function __construct(PDO $pdo){
          $this->pdo = $pdo;
     }
-     public function insertProduct($product_name, $product_lot, $date_expiration, $quantity, $Emplacement) {
+     public function insertProduct($product_name, $product_lot, $unit_price,$date_expiration, $quantity, $Emplacement) {
     try {
         $this->pdo->beginTransaction();
         $queryProduct = 'INSERT INTO product (name, description, unit_price, Emplacement, created_at) 
@@ -17,7 +17,7 @@ class MedicaleRepository{
             ':name'        => $product_name,
             ':Emplacement' => $Emplacement,
             ':description' => 'No description provided', 
-            ':unit_price'  => 0
+            ':unit_price'  => $unit_price,
         ]);
         $productId = $this->pdo->lastInsertId();
         
@@ -46,13 +46,10 @@ class MedicaleRepository{
  public function GetAllProducts() {
     try {
         $query = 'SELECT 
-                    p.id AS product_id,
                     p.name AS product_name, 
-                    p.description,
                     p.Emplacement, 
                     l.lot_number, 
-                    l.expiration_date, 
-                    l.quantity, 
+                    l.expiration_date,  
                     l.status
                   FROM products p
                   INNER JOIN lots l ON p.id = l.product_id
@@ -60,8 +57,18 @@ class MedicaleRepository{
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();       
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
+    } catch (PDOException) {
         return [];
+    }
+}
+public function GeteTotaleLots(){
+    try{
+        $query = 'SELECT count(lots.id) FROM lots';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return (int) $stmt->fetchColumn();
+    }catch (PDOException) {
+        return 0;
     }
 }
 }
