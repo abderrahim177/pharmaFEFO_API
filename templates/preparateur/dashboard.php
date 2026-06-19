@@ -243,11 +243,6 @@ $result = $repository->GeteTotaleLots();
                         </tr>
                     </thead>
                     <tbody id="fefoTableBody" class="divide-y divide-slate-50 text-[11px]">
-                        <tr>
-                            <td colspan="5" class="p-4 text-center text-slate-400 italic">
-                                Chargement de la file FEFO...
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -255,7 +250,6 @@ $result = $repository->GeteTotaleLots();
 
         </div>
     </main>
-    <script type="module" src="../../public/js/Medical.js"></script>
+<script src="../../public/js/Medical.js" defer></script>
 </body>
-
 </html>

@@ -15,9 +15,9 @@ class MedicaleRepository{
         $stmtProduct = $this->pdo->prepare($queryProduct);
         $stmtProduct->execute([
             ':name'        => $product_name,
-            ':Emplacement' => $Emplacement,
             ':description' => 'No description provided', 
-            ':unit_price'  => $unit_price,
+            ':unit_price'  => $unit_price, 
+            ':Emplacement' => $Emplacement
         ]);
         $productId = $this->pdo->lastInsertId();
         
@@ -49,16 +49,21 @@ class MedicaleRepository{
                     p.name AS product_name, 
                     p.Emplacement, 
                     l.lot_number, 
-                    l.expiration_date,  
-                    l.status
-                  FROM products p
-                  INNER JOIN lots l ON p.id = l.product_id
-                  ORDER BY l.expiration_date ASC';
+                    l.expiratio_date AS expiration_date
+                  FROM product p
+                  LEFT JOIN lots l ON p.id = l.product_id
+                  ORDER BY l.expiratio_date ASC';  
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();       
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException) {
-        return [];
+        
+    } catch (PDOException $e) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Erreur SQL: ' . $e->getMessage()
+        ]);
+        exit;
     }
 }
 public function GeteTotaleLots(){

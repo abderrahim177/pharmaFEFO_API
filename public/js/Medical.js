@@ -2,10 +2,11 @@ async function loadFEFOQueue() {
     const url = 'http://localhost/PHARMAFEFO_API/src/controller/web/MedicalContrroller.php';
     const tableBody = document.getElementById('fefoTableBody');
     if (!tableBody) return;
+
     try {
         const response = await fetch(url);
         const res = await response.json();
-        if (res.status !== 'success') return;
+        if (res.status !== 'success') return;   
         if (res.data.length === 0) {
             tableBody.innerHTML = `
                 <tr>
@@ -15,12 +16,15 @@ async function loadFEFOQueue() {
                 </tr>`;
             return;
         }
+
         tableBody.innerHTML = res.data.map(item => {
             const today = new Date();
             const expireDate = new Date(item.expiration_date);
             const diffTime = expireDate - today;
             const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
             let statusText = "", badgeClass = "", dateClass = "";
+
             if (daysLeft <= 30) {
                 statusText = "Priorité 1 (Urgent)";
                 badgeClass = "bg-rose-50 text-rose-700 border border-rose-100";
@@ -34,6 +38,7 @@ async function loadFEFOQueue() {
                 badgeClass = "bg-emerald-50 text-emerald-700 border border-emerald-100";
                 dateClass = "text-emerald-600 font-medium";
             }
+
             return `
                 <tr class="hover:bg-slate-50/80 transition">
                     <td class="p-2 font-medium text-slate-800">${item.product_name}</td>
@@ -54,9 +59,11 @@ async function loadFEFOQueue() {
                 </tr>
             `;
         }).join('');
-        if(document.getElementById('countEntries')) {
+
+        if (document.getElementById('countEntries')) {
             document.getElementById('countEntries').innerText = `${res.data.length} Lot(s)`;
         }
+
     } catch (error) {
         console.error('Erreur lors du chargement:', error);
     }
@@ -111,4 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dluInput) {
         dluInput.min = new Date().toISOString().split('T')[0];
     }
+});
+document.addEventListener('DOMContentLoaded', () => {
+    loadFEFOQueue();
 });
